@@ -1,0 +1,64 @@
+<app-header></app-header>
+<section class="bg-pink-200 h-screen">
+  <div class="container mx-auto py-10">
+    <div class="flex flex-col items-center justify-center">
+      <div class="w-full max-w-md">
+        <div class="bg-white shadow-md rounded-lg p-6">
+          <div class="flex flex-row items-center">
+            <div *ngIf="(profile$ | async) as profileData">
+              <div class="flex flex-col" *ngFor="let data of profileData">
+                <label for="imageInput" class="cursor-pointer flex items-center">
+                  <div class="w-50 h-60 rounded-full mr-4">
+                    <img
+                      id="profileImage"
+                      src="https://static.vecteezy.com/system/resources/previews/020/213/738/original/add-profile-picture-icon-upload-photo-of-social-media-user-vector.jpg"
+                      class="w-full h-full rounded-full"
+                      *ngIf="!isImage"
+                    />
+                    <img *ngIf="isImage" [src]="'http://localhost:3000/' + image$" alt="" />
+                  </div>
+                  <input id="imageInput" type="file" class="hidden" (change)="onFileSelected($event)">
+                  <button
+                    class="text-white bg-red-500 hover:bg-red-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
+                    (click)="openConfirmationDialog()" *ngIf="isImage"
+                  >
+                    Remove
+                  </button>
+                </label>
+
+                <h1 class="text-xl font-semibold mb-2">{{ data.name }}</h1>
+                <p class="text-l text-gray-500 font-semibold">{{ data.email }}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- Alert Section -->
+<div *ngIf="showAlert" class="fixed inset-0 flex items-center justify-center">
+  <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+    <div class="bg-white shadow-md rounded-lg p-6">
+      <h1 class="text-2xl font-bold mb-4">{{ alertData.title }}</h1>
+      <div class="text-center mb-4">
+        <p>{{ alertData.message }}</p>
+      </div>
+      <div class="flex justify-center">
+        <button mat-button class="bg-gray-300 hover:bg-gray-400 text-gray-700 px-4 py-2 rounded mr-4" (click)="onAlertNoClick()">
+          Cancel
+        </button>
+        <button mat-button class="bg-blue-500 hover:bg-blue-700 text-white px-4 py-2 rounded" (click)="onAlertConfirmClick()">
+          Confirm
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+

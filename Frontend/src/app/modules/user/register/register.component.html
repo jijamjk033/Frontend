@@ -1,0 +1,52 @@
+<!-- Register component -->
+<section class="grid min-h-screen place-items-center bg-pink-200 p-16">
+  <div class="w-72 rounded-md bg-pink-100 p-4 pt-0 shadow-lg">
+    <header class="flex h-16 items-center justify-between font-bold text-pink-900">
+      <span>Create Account</span>
+      <!-- SVG: xmark -->
+      <svg fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-6 w-6">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+      </svg>
+      <!-- SVG: xmark -->
+    </header>
+    <form class="grid gap-3" [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+      
+      <!-- Name Input -->
+      <input class="h-10 rounded-sm bg-pink-100/50 px-2 text-pink-900 placeholder:text-pink-600/80 focus:outline-none focus:ring focus:ring-pink-400" type="text" placeholder="Enter your name" formControlName="name" />
+      <div *ngIf="registerForm.controls['name'].errors">
+        <p *ngIf="submit&&registerForm.controls.name.hasError('required')" class="text-red-500">Name Required</p>
+      </div>
+      
+      <!-- Email Input -->
+      <input class="h-10 rounded-sm bg-pink-100/50 px-2 text-pink-900 placeholder:text-pink-600/80 focus:outline-none focus:ring focus:ring-pink-400" type="email" placeholder="Enter your email" formControlName="email" />
+      <div *ngIf="registerForm.controls['email'].errors">
+        <p *ngIf="submit&&registerForm.controls.email.hasError('required')" class="text-red-500">Email Required
+        <p>
+        <p *ngIf="registerForm.controls.email.hasError('email')" class="text-red-500">Invalid Email Format
+        <p>
+      </div>
+      <p class="text-red-500">{{emailUsed}}</p>
+      <!-- Password Input -->
+      <input class="h-10 rounded-sm bg-pink-100/50 px-2 text-pink-900 placeholder:text-pink-600/80 focus:outline-none focus:ring focus:ring-pink-400" type="password" placeholder="Enter your password" formControlName="password"  />
+      <div *ngIf="registerForm.controls['password'].errors">
+        <p *ngIf="submit&&registerForm.controls.password.hasError('required')" class="text-red-500">Password Required
+        </p>
+        <p *ngIf="registerForm.controls.password.hasError('pattern')" class="text-red-500">Invalid Password Format</p>
+      </div>
+      <!-- Confirm Password Input -->
+      <input class="h-10 rounded-sm bg-pink-100/50 px-2 text-pink-900 placeholder:text-pink-600/80 focus:outline-none focus:ring focus:ring-pink-400" type="password" placeholder="Confirm your password" formControlName="cpassword"  />
+      <p *ngIf="inCorrect" class="text-red-500">Password not match</p>
+      <!-- Sign Up Button -->
+      <button class="flex h-10 items-center justify-between rounded-sm bg-pink-700 px-2 text-pink-100 transition-colors duration-300 hover:bg-pink-800 focus:outline-none focus:ring focus:ring-pink-400" type="submit">
+        <span>Sign Up</span>
+        <span>
+          <!-- SVG: chevron-right -->
+          <svg fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-6 w-6">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
+          </svg>
+          <!-- SVG: chevron-right -->
+        </span>
+      </button>
+    </form>
+  </div>
+</section>
